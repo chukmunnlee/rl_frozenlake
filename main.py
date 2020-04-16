@@ -28,27 +28,23 @@ q_table = np.zeros((MAP_SIZE * MAP_SIZE, ACTION_SPACE))
 state_action_reward = np.zeros((MAP_SIZE * MAP_SIZE, ACTION_SPACE))
 state_action_count = np.zeros((MAP_SIZE * MAP_SIZE, ACTION_SPACE))
 
-def epislon(ep):
-   return EPSILON_SCHEDULE[ ep // K ]
-
-
 q_table = np.zeros((MAP_SIZE * MAP_SIZE, ACTION_SPACE))
 
 state_action_reward = np.zeros((MAP_SIZE * MAP_SIZE, ACTION_SPACE))
 state_action_count = np.zeros((MAP_SIZE * MAP_SIZE, ACTION_SPACE))
 
+# randomness to action selection
 def epislon(ep):
    return EPSILON_SCHEDULE[ ep // K ]
 
 # epsilon-greedy policy
 def q(state, e):
-   # greed policy
+   # with 1 - epsilon probability, pick the greedy action
    if np.random.uniform() > e:
       # take the greedy action
       return np.argmax(q_table[state])
-   # random action
+   # with epsilon probability, pick a random action including the greedy action
    return np.random.randint(0, ACTION_SPACE)
-
 
 success = []
 success_rate = []
