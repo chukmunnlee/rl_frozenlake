@@ -17,10 +17,10 @@ MAP_SIZE = 4 # 4 x 4
 
 ACTION_SPACE = 4 # N, S, E, W
 # as episode progress - so does my random action
+EPSILON_SCHEDULE = [ .9, .8, .7, .6, .5, .4, .3, .2, .1, .05, .01 ]
 EPSILON_SCHEDULE = [ .9, .9, .9, .9, .5, .5, .2, .2, .01, .01, .01 ]
 K = 1000
 
-
 EPISODES = K * len(EPSILON_SCHEDULE)
 
 q_table = np.zeros((MAP_SIZE * MAP_SIZE, ACTION_SPACE))
@@ -31,18 +31,6 @@ state_action_count = np.zeros((MAP_SIZE * MAP_SIZE, ACTION_SPACE))
 def epislon(ep):
    return EPSILON_SCHEDULE[ ep // K ]
 
-#env = gym.make('CartPole-v0')
-from print_policy import print_policy
-
-ACTION_SPACE = 4 # N, S, E, W
-# as episode progress - so does my random action
-EPSILON_SCHEDULE = [ .9, .8, .7, .6, .5, .4, .3, .2, .1, .05, .01 ]
-K = 500
-
-# openai gym
-import gym
-
-EPISODES = K * len(EPSILON_SCHEDULE)
 
 q_table = np.zeros((MAP_SIZE * MAP_SIZE, ACTION_SPACE))
 
@@ -51,7 +39,6 @@ state_action_count = np.zeros((MAP_SIZE * MAP_SIZE, ACTION_SPACE))
 
 def epislon(ep):
    return EPSILON_SCHEDULE[ ep // K ]
-
 
 # epsilon-greedy policy
 def q(state, e):
